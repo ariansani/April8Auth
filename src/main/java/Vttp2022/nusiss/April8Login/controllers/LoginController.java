@@ -45,7 +45,7 @@ public class LoginController {
 
         mvc.addObject("authUser", authUser);
 
-        mvc.setStatus(HttpStatus.CREATED);
+        mvc.setStatus(HttpStatus.OK);
         mvc.setViewName("login");
         return mvc;
 
