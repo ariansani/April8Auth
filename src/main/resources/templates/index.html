@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+</head>
+<body>
+
+	<h1>Enter your login details</h1>
+
+	<form method="POST" action="/authenticate">
+
+		<table>
+			<tr>
+				<td>
+					<label for="name">Username:</label>
+				</td>
+				<td>
+					<input id="username" type="text" name="username" required>
+				</td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td>
+					<input type="password" name="password" required>
+				</td>
+			</tr>
+		</table>
+
+
+		<button type="submit">Login</button>
+
+	</form>
+	
+</body>
+</html>
