@@ -33,18 +33,9 @@ public class LoginController {
 
         ModelAndView mvc = new ModelAndView();
 
-        Optional<User> optUser = create(form);
+       User optUser = create(form);
         
-        if (optUser.isEmpty()) {
-            mvc.setStatus(HttpStatus.BAD_REQUEST);
-            mvc.setViewName("error");
-            return mvc;
-        }
-
-
-        User user = optUser.get();
-        
-        User authUser = loginSvc.authenticate(user);
+        User authUser = loginSvc.authenticate(optUser);
         
         if (authUser==null) {
             mvc.setStatus(HttpStatus.BAD_REQUEST);
@@ -60,7 +51,7 @@ public class LoginController {
 
     }
 
-    private Optional<User> create(MultiValueMap<String, String> form) {
+    private User create(MultiValueMap<String, String> form) {
 
         User user = new User();
         try {
@@ -70,9 +61,9 @@ public class LoginController {
         } catch (Exception ex) {
             // TODO: handle exception
             ex.printStackTrace();
-            return Optional.empty();
+           
         }
-        return Optional.of(user);
+        return user;
     }
 
 }
