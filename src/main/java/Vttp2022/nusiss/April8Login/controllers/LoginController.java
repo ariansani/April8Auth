@@ -2,6 +2,10 @@ package Vttp2022.nusiss.April8Login.controllers;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -28,12 +32,18 @@ public class LoginController {
         return "index";
     }
 
+    @GetMapping("/logout")
+    public String getLogout(HttpSession sess){
+        sess.invalidate();
+        return "index";
+    }
+
     @PostMapping(path="/authenticate")
-    public ModelAndView authenticateLogin(@RequestBody MultiValueMap<String, String> form) {
+    public ModelAndView authenticateLogin(@RequestBody MultiValueMap<String, String> form, HttpSession sess) {
 
         ModelAndView mvc = new ModelAndView();
 
-       User optUser = create(form);
+        User optUser = create(form);
         
         User authUser = loginSvc.authenticate(optUser);
         
@@ -43,10 +53,16 @@ public class LoginController {
             return mvc;
         }
 
-        mvc.addObject("authUser", authUser);
+        sess.setAttribute("username", authUser.getUsername());
+        sess.setAttribute("authUserSess",authUser);
 
-        mvc.setStatus(HttpStatus.OK);
-        mvc.setViewName("login");
+        mvc.addObject("authUser", authUser);
+        mvc = new ModelAndView("redirect:/protected/login");
+           
+
+        // mvc.setStatus(HttpStatus.OK);
+        // mvc.setViewName("login");
+        
         return mvc;
 
     }

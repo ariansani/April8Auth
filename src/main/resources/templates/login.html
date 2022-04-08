@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <span> Welcome <code data-th-text="${authUser.username}"></code></span>
-</body>
-</html>
+    <br />
+    <br />
+    <span>
+      Welcome (From Session String Username)<code
+        data-th-text="${username}"
+      ></code
+    ></span>
+    <br />
+    <br />
+    <span>
+      Welcome (From Session User Object**)<code
+        data-th-text="${authUserSess.username}"
+      ></code
+    ></span>
+
+    <form action="/logout" method="get">
+        <button type="submit">Logout</button>
+    </form>
+  </body>
+</html> 
