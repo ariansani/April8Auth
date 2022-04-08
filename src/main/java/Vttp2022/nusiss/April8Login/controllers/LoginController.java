@@ -38,7 +38,7 @@ public class LoginController {
         User authUser = loginSvc.authenticate(optUser);
         
         if (authUser==null) {
-            mvc.setStatus(HttpStatus.BAD_REQUEST);
+            mvc.setStatus(HttpStatus.UNAUTHORIZED);
             mvc.setViewName("error");
             return mvc;
         }
